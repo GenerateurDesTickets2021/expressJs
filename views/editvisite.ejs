@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body onload="rassemble()">
+
+<div class="container">
+  <h2><%= title %></h2>
+  <form action="/updatvisite" method="post">
+    <div class="form-group">
+        <label for="id">Id:</label>
+        <input type="text" class="form-control" id="id" placeholder="Enter id" value="<%= m.id %>" name="id" required readonly>
+      </div>
+    <div class="form-group">
+      <label for="id">Etat:</label>
+      <input type="text" class="form-control" id="etat" placeholder="Enter etat" value="<%= m.etat %>" name="etat" required >
+    </div>
+    <div class="form-group">
+      <label for="img">Photo:</label>
+      <input type="file" class="form-control" id="img" name="img" accept="image/*">
+    </div>
+
+    <button type="submit" id="but" class="btn btn-outline-success" disabled>Submit</button>
+  </form>
+</div>
+</body>
+
+
+
+<script>
+    function rassemble(){
+      navigator.geolocation.getCurrentPosition(getDistanceFromLatLng);
+    function getDistanceFromLatLng(position) {
+      lat1 = position.coords.latitude;
+      lng1 = position.coords.longitude;
+      var row =<%-JSON.stringify(m) %>;
+      lat2=row.latitude;
+      lng2=row.longitude;
+      //lat2 = 33.59359;
+      //lng2 = -7.6031;
+      function deg2rad(deg) { return deg * (Math.PI / 180); }
+      function square(x) { return Math.pow(x, 2); }
+      var r = 6371; // radius of the earth in km
+      lat1 = deg2rad(lat1);
+      lat2 = deg2rad(lat2);
+      var lat_dif = lat2 - lat1;
+      var lng_dif = deg2rad(lng2 - lng1);
+      var a = square(Math.sin(lat_dif / 2)) + Math.cos(lat1) * Math.cos(lat2) * square(Math.sin(lng_dif / 2));
+      var d = 2 * r * Math.asin(Math.sqrt(a));
+      alert("la Distance entre Vous est le monument est : "+d+" Km");
+      if(d<6){
+        let button = document.getElementById("but");
+          button.disabled = false;
+          
+        alert("Oui vous etes à "+row.nom);
+      }
+    }}
+</script>
+</html>

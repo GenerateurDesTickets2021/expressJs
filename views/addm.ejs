@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2><%= title %></h2>
+  <form action="/savem" method="post">
+    <div class="form-group">
+    <div class="form-group">
+      <label for="nom">Nom:</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter name" name="nom" required>
+    </div>
+    <div class="form-group">
+        <label for="id">latitude:</label>
+        <input type="text" class="form-control" id="lat" placeholder="Enter latitude" name="latitude" required>
+      </div>
+      <div class="form-group">
+        <label for="id">Longitude:</label>
+        <input type="text" class="form-control" id="lng" placeholder="Enter longitude"  name="longitude" required>
+      </div>
+      <div class="form-group">
+        <label for="id">ville:</label>
+        <input type="text" class="form-control" id="email" placeholder="Enter ville"  name="ville" required>
+      </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<style type="text/css">
+  /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+  #map {
+    height: 80%;
+    width: 80%;
+  }
+
+  /* Optional: Makes the sample page fill the window. */
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<script>
+  let map;
+
+  function initMap() {
+    var lat=document.getElementById("lat");
+    var lng=document.getElementById("lng");
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat:lat, lng:lng},
+      zoom: 14,
+    });
+//add marker
+var marker =new google.maps.Marker({
+    position:{lat:position.coords.latitude , lng:position.coords.longitude},
+    map:map
+});  
+
+}
+</script>
+</head>
+<body>
+<div id="map"></div>
+
+<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPjsLyjTEgYf904X0d-udZrIe9DrqDsM0
+  &callback=&libraries=&v=weekly"
+  async
+></script>
+
+</body>
+</html>

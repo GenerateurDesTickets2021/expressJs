@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <style>
+    h2{
+      color:darkblue;
+      text-align:center;
+      font-family: Arial, Verdana, serif;
+      font-weight: bold; 
+      width: 100%;
+      size: inherit;
+    }
+  </style>
+
+<div class="container">
+  <h2 ><%= title %></h2><br><br><br>
+<table class="table table-striped" style="width: 100%">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>latitude</th>
+        <th>Longitude</th>
+        <th>Etat</th>
+      </tr>
+    </thead>
+    <tbody id="t">
+        <% monument.forEach(function(m){ %>
+            <tr>
+                <td><%= m.id %></td>
+                <td><%= m.date %></td>
+                <td><%= m.latitude %></td>
+                <td><%= m.longitude %></td>
+                <td><%= m.etat %></td>
+                <td>
+                  <button class="btn btn-outline-success" >Visiter</button>
+              </td>
+            </tr>
+        <% }); %>
+    </tbody>
+  </table>
+  </div>
+  </body>
+  </html>

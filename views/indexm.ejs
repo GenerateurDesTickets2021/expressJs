@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <style>
+    h2{
+      color:darkblue;
+      text-align:center;
+      font-family: Arial, Verdana, serif;
+      font-weight: bold; 
+      width: 100%;
+      size: inherit;
+    }
+  </style>
+
+<div class="container">
+  <h2 ><%= title %></h2><br><br><br>
+  <a href="/addm" class="btn btn-outline-primary">Ajouter d'autre Monuments à Visiter</a><br/><br/>
+  <a href="/visite" class="btn btn-outline-primary">Consulter Les Monuments Visitées</a><br/><br/>
+  <table class="table table-striped" style="width: 100%">
+    <thead  >
+      <tr>
+        <th>ID</th>
+        <th>NOM</th>
+        <th>latitude</th>
+        <th>Longitude</th>
+        <th>Ville</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% monument.forEach(function(m){ %>
+            <tr>
+                <td><%= m.id %></td>
+                <td><%= m.nom %></td>
+                <td><%= m.latitude %></td>
+                <td><%= m.longitude %></td>
+                <td><%= m.ville %></td>
+                
+                
+                <td>
+                    <a href="editm/<%= m.id %>" class="btn btn-outline-success">Edit</a>
+                    <a href="deletem/<%= m.id %>" class="btn btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        <% }); %>
+    </tbody>
+  </table>
+  
+
+</div>
+<style type="text/css">
+  /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+  #map {
+    height: 80%;
+    width: 100%;
+  }
+
+  /* Optional: Makes the sample page fill the window. */
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<script>
+
+  let map;
+
+  function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: {lat:31.792305849269,lng: -7.080168000000015},
+      zoom: 5,
+    })
+   marker();
+   // marker(33.233334,-8.5);
+   // marker(33.59359,-7.6031);
+    };
+//add marker
+function marker(){
+  var row =<%-JSON.stringify(monument) %>;
+  row.forEach(function (m) {
+    var marker =new google.maps.Marker({
+    position:{lat:m.latitude,lng:m.longitude},
+	title:m.nom,
+    map:map});
+  });}
+
+
+
+</script>
+</head>
+<body>
+<div id="map"></div>
+
+<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPjsLyjTEgYf904X0d-udZrIe9DrqDsM0
+  &callback=initMap&libraries=&v=weekly"
+  async
+></script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2><%= title %></h2>
+  <form action="/updatem" method="post">
+   
+    <div class="form-group">
+      <label for="id">Id:</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter id" value="<%= m.id %>" name="id" required>
+    </div>
+    <div class="form-group">
+      <label for="nom">Nom:</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter name" value="<%= m.nom %>" name="nom" required>
+    </div>
+    <div class="form-group">
+        <label for="id">latitude:</label>
+        <input type="text" class="form-control" id="email" placeholder="Enter latitude" value="<%= m.latitude %>" name="latitude" required>
+      </div>
+      <div class="form-group">
+        <label for="id">Longitude:</label>
+        <input type="text" class="form-control" id="email" placeholder="Enter longitude" value="<%= m.longitude %>" name="longitude" required>
+      </div>
+      <div class="form-group">
+        <label for="id">ville:</label>
+        <input type="text" class="form-control" id="email" placeholder="Enter ville" value="<%= m.ville %>" name="ville" required>
+      </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+</body>
+</html>
